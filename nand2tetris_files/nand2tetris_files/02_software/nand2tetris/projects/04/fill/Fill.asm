@@ -12,3 +12,21 @@
 // the screen should remain fully clear as long as no key is pressed.
 
 // Put your code here.
+
+// Set vars
+@16
+D=A
+@sixteen
+M=D
+// Fill all with black
+@SCREEN
+D=A
+// Set section
+@D
+M=-1
+// Set D to 
+@sixteen
+D=M
+
+@3
+D;JMP
