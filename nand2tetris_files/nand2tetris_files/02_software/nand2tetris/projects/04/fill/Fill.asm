@@ -13,20 +13,74 @@
 
 // Put your code here.
 
-// Set vars
-@16
-D=A
-@sixteen
-M=D
-// Fill all with black
+// While key is not pressed (white):
+
+// Set open
 @SCREEN
 D=A
+@0
+M=A
 // Set section
-@D
-M=-1
-// Set D to 
-@sixteen
+A=D
+// Set Color
+M=0
+// Back to top if on final row
+@0
+M=D
+@24575
+D=A-D //...Dad? Is that you?
+@15 // Skip to Stepper
+D;JNE
+@0
+M=A
+D=A
+// Set D to next section
+@0
+M=M+1
 D=M
+// check if key is pressed
+@KBD
+D=M
+@26 //Black Loop start
+D;JNE
+@0
+D=M
+// Reset White loop
+@2
+D;JMP
 
-@3
+////////////////////////////////////////////////////////////////
+// While key is pressed (black):
+
+// Set open
+@SCREEN
+D=A
+@0
+M=A
+// Set section and color
+A=D
+M=-1
+// Back to top if on final row
+@0
+M=D
+@24575
+D=A-D //...Dad? Is that you?
+@41 // Skip to Stepper
+D;JNE
+@0
+M=A
+D=A
+// Set D to next section
+@0
+M=M+1
+D=M
+// check if key is pressed
+@KBD
+D=M
+@0 //White Loop Start
+D;JEQ
+@0 // I know I just did that, but this keeps the program symmetrical
+D=M
+// Reset Black loop
+@30
 D;JMP
