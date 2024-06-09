@@ -40,4 +40,42 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
+    // A vs. C setup
+    Mux16(a=instruction, b=ALUOut, sel=instruction[0], out=aRegIn);
+    ARegister(in=aRegIn, load=instruction[10], out=aRegOut);
+    // a bit muxer
+    Mux16(a=aRegOut, b=inM, sel=instruction[3], out=aBitOut);
+    DRegister(in=ALUOut, load=instruction[11], out=dRegOut);
+    // ALU
+    ALU(x=dRegOut
+     y=aBitOut,
+     zx=instruction[4],
+     nx=instruction[5],
+     zy=instruction[6],
+     ny=instruction[7],
+     f=instruction[8],
+     no=instruction[9],
+     out=ALUOut, out=outM,
+     zr=EQ,
+     ng=LT);
+
+    // PC
+    And(a=aRegOut[1..15], b=a=aRegOut[1..15], out=address);
+    Not(in=LT, out=GT);
+
+    And(a=LT, b=instruction[13], out=LTTrue);
+    And(a=EQ, b=instruction[14], out=EQTrue);
+    And(a=GT, b=instruction[15], out=GTTrue);
+
+    Or(a=LTTrue, b=EQTrue, out=True1);
+    Or(a=True1, b=GTTrue, out=load);
+
+    Not(in=load, out=inc);
+
+    PC(in=address, load=load, inc=inc, reset=reset, out=pc);
+
+    // Final outputs
+    And(a=instruction[12], b=a=instruction[12], out=writeM);
+    And(a=address, b=address, out=addressM);
+
 }

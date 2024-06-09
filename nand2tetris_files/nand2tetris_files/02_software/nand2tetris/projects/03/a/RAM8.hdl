@@ -16,4 +16,26 @@ CHIP RAM8 {
 
     PARTS:
     // Put your code here:
+    // Select register
+    DMux(in=in, sel=address[0], a=DM0_3, b=DM4_7);
+    DMux(in=DM0_3, sel=address[1], a=DM0_1, b=DM2_3);
+    DMux(in=DM4_7, sel=address[1], a=DM4_5, b=DM6_7);
+    DMux(in=DM0_1, sel=address[2], a=R0, b=R1);
+    DMux(in=DM2_3, sel=address[2], a=R2, b=R3);
+    DMux(in=DM4_5, sel=address[2], a=R4, b=R5);
+    DMux(in=DM6_7, sel=address[2], a=R6, b=R7);
+
+    // Setup registers
+    Register(in=R0, load=load, out=R0Out);
+    Register(in=R1, load=load, out=R1Out);
+    Register(in=R2, load=load, out=R2Out);
+    Register(in=R3, load=load, out=R3Out);
+    Register(in=R4, load=load, out=R4Out);
+    Register(in=R5, load=load, out=R5Out);
+    Register(in=R6, load=load, out=R6Out);
+    Register(in=R7, load=load, out=R7Out);
+
+    // Extract register
+    Mux(a=, b=, sel=, out=);
+
 }

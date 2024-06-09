@@ -7,7 +7,7 @@ Contains dictionaries for comp, dest and jump segments
 import sys
 
 ###############################################################################
-# Dict functions
+# Dictionaries
 
 def comp_dict():
     """
@@ -155,7 +155,7 @@ def bin_translate (line: str) -> str:
     bin_line = c_translate(line)
     return bin_line
 
-
+###############################################################################
 ###############################################################################
 # Main
 
