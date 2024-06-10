@@ -28,4 +28,11 @@ CHIP Memory {
 
     PARTS:
     // Put your code here:
+
+    // DMux action pickers
+
+    RAM16K(in=in, load=load, address=address[1..15], out=Ram);
+    RAM4K(in=in, load=load, address=address[3..15], out=Screen1);
+    RAM4K(in=in, load=load, address=address[3..15], out=Screen2);
+    ROM32K(address=address, out=Rom);
 }

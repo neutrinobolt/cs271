@@ -81,6 +81,31 @@ def jump_dict():
 
     return keys
 
+def symb_dict():
+    """
+    Contains symbol dictionary.
+    """
+    symbols = {
+        "R0" : 0,
+        "R1" : 1,
+        "R2" : 2,
+        "R3" : 3,
+        "R4" : 4,
+        "R5" : 5,
+        "R6" : 6,
+        "R7" : 7,
+        "R8" : 8,
+        "R9" : 9,
+        "R10" : 10,
+        "R11" : 11,
+        "R12" : 12,
+        "R13" : 13,
+        "R14" : 14,
+        "R15" : 15,
+        "SCREEN" : 16384,
+        "KBD": 24576
+    }
+
 ###############################################################################
 # String splicing functions
 
@@ -114,35 +139,27 @@ def c_translate (line: str) -> str:
     if ";" in line:
         jump = line.split(";")[1].strip(";")
         line = line.split(";")[0]
-        # print(f"line: {line}")
     else:
         jump = "null"
-    # print(f"jump: {jump}")
     # Comp
     if "=" in line:
         comp = line.split("=")[1].strip("=")
-        # print(f"comp: {comp}")
         line = line.split("=")[0]
     else:
         comp = line
-        # print(f"comp: {comp}")
+
     # Dest is remainder of line
     dest = line
-    # print(f"dest: {dest}")
     # Set opening bits
     open_bits = "111"
     # Set comp bits (7)
     comp_bits = comps[comp]
-    # print(f"comp_bits: {comp_bits}")
     # Set destination bits
     dest_bits = dests[dest]
-    # print(f"dest_bits: {dest_bits}")
     # Set jump bits
     jump_bits = jumps[jump]
-    # print(f"jump_bits: {jump_bits}")
     # Put it all together
     bin_line = open_bits + comp_bits + dest_bits + jump_bits
-    # print(f"bin_line: {bin_line}")
     return bin_line
 
 def bin_translate (line: str) -> str:
